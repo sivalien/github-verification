@@ -9,7 +9,7 @@ import static junit.framework.TestCase.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 
-public class MessageTemplateVerifierTest {
+public class MessageTemplateVerifierTests {
 
     @Test
     public void check() {
