@@ -9,7 +9,7 @@ public class MessageSender {
             public void run() {
                 while (true) {
                     try {
-                        System.out.println("Влад Котов, где ТЗ? Ты же обещал");
+                        System.out.println("Влад Котов, где ТЗ? Ты же обещал...git ");
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
