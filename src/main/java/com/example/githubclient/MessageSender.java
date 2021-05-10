@@ -1,22 +1,12 @@
 package com.example.githubclient;
 
-import java.lang.reflect.Field;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MessageSender {
-    public static void main(String[] args) throws NoSuchFieldException {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        System.out.println("Влад Котов, где ТЗ? Ты же обещал...git ");
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        thread.start();
+    @Scheduled(cron = "0/5 * * ? * *")
+    void sendMessage() {
+        System.out.println("Влад Котов, где ТЗ? Ты же обещал...");
     }
 }
