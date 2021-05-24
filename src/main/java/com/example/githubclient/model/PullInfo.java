@@ -2,7 +2,9 @@ package com.example.githubclient.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PullInfo {
+import java.io.Serializable;
+
+public class PullInfo implements Serializable {
     @JsonProperty("title")
     private String title;
     @JsonProperty("number")

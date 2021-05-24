@@ -2,7 +2,9 @@ package com.example.githubclient.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Commit {
+import java.io.Serializable;
+
+public class Commit implements Serializable {
     @JsonProperty("message")
     private String message;
 

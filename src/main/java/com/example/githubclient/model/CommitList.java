@@ -2,7 +2,9 @@ package com.example.githubclient.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CommitList {
+import java.io.Serializable;
+
+public class CommitList implements Serializable {
     @JsonProperty("url")
     private String url;
     @JsonProperty("commit")
