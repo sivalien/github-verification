@@ -1,15 +1,11 @@
 package com.example.githubclient;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import static junit.framework.TestCase.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class MessageTemplateVerifierTests {
+public class MessageTemplateVerifierTests extends AbstractGithubVerificationTest {
 
     @Test
     public void check() {
