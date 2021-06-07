@@ -1,4 +1,4 @@
-package com.example.githubclient.model;
+package com.example.githubclient.model.githubmodels;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

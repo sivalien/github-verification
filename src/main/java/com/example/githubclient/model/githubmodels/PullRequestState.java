@@ -1,4 +1,4 @@
-package com.example.githubclient.model;
+package com.example.githubclient.model.githubmodels;
 
 public enum PullRequestState {
     OPEN("open"),

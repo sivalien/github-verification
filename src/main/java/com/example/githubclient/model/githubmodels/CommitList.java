@@ -1,5 +1,6 @@
-package com.example.githubclient.model;
+package com.example.githubclient.model.githubmodels;
 
+import com.example.githubclient.model.githubmodels.Commit;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -14,7 +15,7 @@ public class CommitList implements Serializable {
         return url;
     }
 
-    public void url(String commentsUrl) {
+    public void setUrl(String commentsUrl) {
         this.url = url;
     }
 
