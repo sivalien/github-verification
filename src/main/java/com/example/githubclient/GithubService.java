@@ -1,6 +1,7 @@
 package com.example.githubclient;
 
-import com.example.githubclient.model.*;
+import com.example.githubclient.model.databasemodels.RepoInfo;
+import com.example.githubclient.model.githubmodels.*;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 @Service
 public class GithubService {
     private GithubClient client;
-
+    private DatabaseService databaseService;
 
     public GithubService(GithubClient client) {
         this.client = client;
@@ -48,15 +49,24 @@ public class GithubService {
                 .collect(Collectors.toList());
     }
 
-    void checkPullTitle(String owner, String repo, int number) throws IOException {
-        IssueComment issueComment = new IssueComment();
-        ReviewComment reviewComment = new ReviewComment();
-        String message = MessageTemplateVerifier.process(client.getUserRepoPulls(owner, repo).stream()
-                .filter(pullInfo -> pullInfo.getNumber() == number)
-                .map(PullInfo::getTitle).collect(Collectors.joining()));
-        issueComment.setBody(message);
-        reviewComment.setBody(message);
-        client.createReviewComment(reviewComment, owner, repo, number);
-        client.createIssueComment(issueComment, owner, repo, number);
+    void checkPullAndCommit() throws IOException {
+        List<RepoInfo> repoInfos = databaseService.getRepoInfo();
+        for (RepoInfo repoInfo : repoInfos) {
+            if (!repoInfo.isChecked()) {
+                String owner = repoInfo.getLogin();
+                String repo = repoInfo.getName();
+                List<PullInfo> pullInfos = client.getUserRepoPulls(owner, repo);
+                for (PullInfo pull: pullInfos) {
+                    int number = pull.getNumber();
+                    String message = MessageTemplateVerifier.process(pull, client.getUserRepoCommits(owner, repo, number));
+                    IssueComment issueComment = new IssueComment();
+                    ReviewComment reviewComment = new ReviewComment();
+                    issueComment.setBody(message);
+                    reviewComment.setBody(message);
+                    client.createIssueComment(issueComment, repo, owner, number);
+                    client.createReviewComment(reviewComment, repo, owner, number);
+                }
+            }
+        }
     }
 }
